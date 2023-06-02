@@ -8,10 +8,14 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher(bot=bot)
 
 
+@dp.message_handler(commands=['start'])
+async def start_handler(message: types.Message):
+    await message.reply("Hello! \n Welcome to our QR_Code to Text Bot")
+
+
 @dp.message_handler()
 async def start_handler(message: types.Message):
     await bot.send_photo(message.from_user.id, text_to_qr(message.text))
-
 
 if __name__ == "__main__":
     executor.start_polling(dp)
